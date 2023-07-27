@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types,  */
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./Map.module.css";
+import { useGeolocation } from "../hooks/useGeolocation";
+import Button from "../components/Button";
 import {
   MapContainer,
   Marker,
@@ -11,13 +13,19 @@ import {
 } from "react-leaflet";
 import { useEffect, useState } from "react";
 import { useCities } from "../contexts/CitiesContext";
-function Map() {
-  const [searchParams] = useSearchParams();
-  const [maPosition, setMaPosition] = useState([40, 0]);
+import { useUrlPosition } from "../hooks/useUrlPosition";
 
-  const mapLat = searchParams.get("lat");
-  const mapLng = searchParams.get("lng");
+function Map() {
+  const [maPosition, setMaPosition] = useState([40, 0]);
+  const {
+    isLoading: isLoadingPosition,
+    position: geolocationPosition,
+    getPosition: getGeolocationPosition,
+  } = useGeolocation();
+
+  const [mapLat, mapLng] = useUrlPosition();
   const { cities } = useCities();
+  console.log(cities);
 
   useEffect(
     function () {
@@ -26,8 +34,21 @@ function Map() {
     [mapLat, mapLng]
   );
 
+  useEffect(
+    function () {
+      if (geolocationPosition)
+        setMaPosition([geolocationPosition.lat, geolocationPosition.lng]);
+    },
+    [geolocationPosition]
+  );
+
   return (
     <div className={styles.mapContainer}>
+      {!geolocationPosition && (
+        <Button type="position" onClick={getGeolocationPosition}>
+          {isLoadingPosition ? "Loading..." : "Use your location"}
+        </Button>
+      )}
       <MapContainer
         center={maPosition}
         zoom={13}
