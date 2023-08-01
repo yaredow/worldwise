@@ -28,8 +28,6 @@ To run this project locally, you need to have [Node.js] and [npm] installed on y
 ![Form](./WorldWise_screenshots/form.PNG)
 ![Cities](./WorldWise_screenshots/cities.PNG)
 
-![Facts Page]
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE] file for details.
