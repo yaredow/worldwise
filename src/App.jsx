@@ -10,6 +10,7 @@ import { AuthProvider } from "./contexts/FakeAuthContext";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import SpinnerFullPage from "./components/SpinnerFullPage";
 
+// Lazy loading components
 const HomePage = lazy(() => import("./pages/HomePage"));
 const Product = lazy(() => import("./pages/Product"));
 const Pricing = lazy(() => import("./pages/Pricing"));
