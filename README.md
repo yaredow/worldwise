@@ -32,4 +32,4 @@ To run this project locally, you need to have [Node.js] and [npm] installed on y
 
 This project is licensed under the MIT License - see the [LICENSE] file for details.
 
-How else can I help?
+How else can I help you?
